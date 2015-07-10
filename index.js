@@ -9,24 +9,24 @@ process.env.TZ = 'America/Los_Angeles'; //Home :)
 function getDateTime(returnDateTime) { //Get the time, 1 for dateTime; 0 for time.
 
     var date = new Date();
-
+    
     var hour = date.getHours();
     hour = (hour < 10 ? "0" : "") + hour;
-
+    
     var min  = date.getMinutes();
     min = (min < 10 ? "0" : "") + min;
-
+    
     var sec  = date.getSeconds();
     sec = (sec < 10 ? "0" : "") + sec;
-
+    
     var year = date.getFullYear();
-
+    
     var month = date.getMonth() + 1;
     month = (month < 10 ? "0" : "") + month;
 
     var day  = date.getDate();
     day = (day < 10 ? "0" : "") + day;
-
+    
     if(returnDateTime == 1) {
         return month + "/" + day + "/" + year + " " + hour + ":" + min + ":" + sec;
     }else{
@@ -77,12 +77,12 @@ http.createServer(function (req, res) {
 }).listen(8080);
 
 http.createServer(function (req, res) {
-	fs.createReadStream("private.html").pipe(res); //Private Chat
+    fs.createReadStream("private.html").pipe(res); //Private Chat
 }).listen(8079);
 
 var server = ws.createServer(function (connection) {
     //Set-up client vars
-	connection.nickname = null;
+    connection.nickname = null;
 	connection.password_ask = 0;
 	connection.password_auth = null;
 	connection.currentRoom = getRoom(connection);
@@ -120,12 +120,12 @@ var server = ws.createServer(function (connection) {
 	});
 	
 	connection.on("close", function () {
-        console.log(getDateTime(1) + " | [Info]: '" + connection.nickname+"' left '" + connection.currentRoom + "'");
+		console.log(getDateTime(1) + " | [Info]: '" + connection.nickname+"' left '" + connection.currentRoom + "'");
 		sendToRoom(server, connection.currentRoom, "user '" + connection.nickname + "' left the room.");
 	});
 	
 	connection.on("error", function () { //To catch ECONNREFUSED D:<<
-        console.log(getDateTime(1) + " | [Info]: '" + connection.nickname+"' abruptly left :(");
+		console.log(getDateTime(1) + " | [Info]: '" + connection.nickname+"' abruptly left :(");
 	});
 	
 });
