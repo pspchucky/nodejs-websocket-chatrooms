@@ -22,5 +22,5 @@ ws://<address>:8081/?room=YourRoomName
 ```
 as your websocket URL.
 # Known Bugs
-* Messages can be viewed while waiting to enter private room password.
-* Title of webpage doesn't update to the current chatroom.
+* Private room messages can be viewed while the server waits for the client to enter private room password.
+* The title of webpage doesn't update to the current chatroom the client is chatting in.
